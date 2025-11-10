@@ -22,12 +22,11 @@ Este é um **sistema de cadastro de indicações (contatos)** com:
 | Tecnologia        | Versão / Uso |
 |-------------------|-------------|
 | **Laravel**       | 10.x ou superior |
-| **PHP**           | >= 8.1 |
+| **PHP**           | = 7.4.33 |
 | **MySQL**         | 5.7+ |
 | **Tailwind CSS**  | CDN (ou via Vite) |
 | **jQuery**        | 3.7.1 (AJAX) |
 | **Blade**         | Templates Laravel |
-| **Axios**         | Não usado (substituído por jQuery) |
 
 ---
 
