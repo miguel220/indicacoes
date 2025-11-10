@@ -237,21 +237,15 @@ php artisan tinker
 
 ## Autor
 
-**Desenvolvido por:** [Seu Nome]  
+**Desenvolvido por:** [Miguel Borges]  
 **Data:** 10 de Novembro de 2025  
-**Local:** Brasil
+
 
 ---
 
 > **"Um sistema simples, funcional e bonito."**  
 > Feito com Laravel, amor e café.
 
----
 
-**Pronto para produção!**  
-Qualquer dúvida, abra uma *issue* ou me chame no WhatsApp.
 
---- 
 
-**Quer a versão com Livewire?**  
-É só pedir: `php artisan make:livewire IndicacaoForm`
