@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indicacao;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -19,17 +20,27 @@ class IndicacaoController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'email' => 'required|email|unique:indicacao,email',
-            'telefone' => 'required|string|regex:/^\(\d{2}\) \d{5}-\d{4}$/',
+            'nome'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:indicacoes,email',
+            'telefone' => 'required|regex:/^\(\d{2}\) \d{5}-\d{4}$/',
+        ], [
+            'email.unique' => 'Este e-mail já está sendo usado.'
         ]);
 
-        $indicacoes = Indicacao::create($request->only('nome', 'email', 'telefone'));
+        try {
+            $indicacao = Indicacao::create($request->only('nome', 'email', 'telefone'));
 
-        return response()->json([
-            'message' => 'Indicacao adicionado com sucesso!',
-            'indicacao' => $indicacoes
-        ], 201);
+            return response()->json([
+                'mensagem' => 'Indicação cadastrada com sucesso!',
+                'indicacao' => $indicacao
+            ], 201);
+
+        } catch (QueryException $e) {
+
+            return response()->json([
+                'erro' => 'Erro ao salvar. Tente novamente.'
+            ], 500);
+        }
     }
 
     // Deletar
