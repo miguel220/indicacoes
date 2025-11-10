@@ -117,7 +117,7 @@ php artisan migrate
 php artisan serve
 ```
 
-Acesse: [http://localhost:8000/indicacoes](http://localhost:8000/)
+Acesse: [http://localhost:8000/](http://localhost:8000/)
 
 ---
 
