@@ -1,64 +1,251 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# **Gerenciador de Contatos (Indicações)**  
+*Um CRUD simples com Laravel + Blade + Tailwind CSS + AJAX (jQuery)*
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## Visão Geral
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este é um **sistema de cadastro de indicações (contatos)** com:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Formulário para adicionar **Nome, E-mail e Telefone (com máscara)**
+- Lista dinâmica com **remoção**
+- Dados salvos no **banco de dados MySQL**
+- Comunicação com **API REST (Laravel)**
+- Interface moderna com **Tailwind CSS**
+- Requisições **AJAX (jQuery)**
+- Validação no backend e frontend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Tecnologias Utilizadas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Tecnologia        | Versão / Uso |
+|-------------------|-------------|
+| **Laravel**       | 10.x ou superior |
+| **PHP**           | >= 8.1 |
+| **MySQL**         | 5.7+ |
+| **Tailwind CSS**  | CDN (ou via Vite) |
+| **jQuery**        | 3.7.1 (AJAX) |
+| **Blade**         | Templates Laravel |
+| **Axios**         | Não usado (substituído por jQuery) |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Estrutura do Projeto
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+app/
+├── Models/
+│   └── Indicacao.php
+├── Http/
+│   └── Controllers/
+│       └── IndicacaoController.php
+database/
+├── migrations/
+│   └── 2025_xx_xx_create_indicacoes_table.php
+resources/
+├── views/
+│   └── indicacoes.blade.php
+├── css/
+│   └── app.css (Tailwind)
+routes/
+├── web.php
+└── api.php
+```
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Banco de Dados
 
-## Contributing
+### Tabela: `indicacoes`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Coluna         | Tipo             | Descrição                     |
+|----------------|------------------|-------------------------------|
+| `id`           | bigint           | Chave primária                |
+| `nome`         | varchar(255)     | Nome completo                 |
+| `email`        | varchar(255)     | E-mail (único)                |
+| `telefone`     | varchar(255)     | Formato: `(11) 98765-4321`    |
+| `criado_em`    | timestamp        | Data de criação               |
+| `atualizado_em`| timestamp        | Data de atualização           |
 
-## Code of Conduct
+> **Observação**: Usamos `criado_em` e `atualizado_em` (em português), não `created_at`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Instalação
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone o repositório
 
-## License
+```bash
+git clone https://github.com/seu-usuario/gerenciador-indicacoes.git
+cd gerenciador-indicacoes
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Instale as dependências
+
+```bash
+composer install
+npm install && npm run build
+```
+
+### 3. Configure o `.env`
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=indicacoes
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 4. Gere a chave da aplicação
+
+```bash
+php artisan key:generate
+```
+
+### 5. Execute as migrations
+
+```bash
+php artisan migrate
+```
+
+### 6. Inicie o servidor
+
+```bash
+php artisan serve
+```
+
+Acesse: [http://localhost:8000/](http://localhost:8000/)
+
+---
+
+## Rotas
+
+### Web (Blade)
+
+| Rota             | Método | Descrição               |
+|------------------|--------|-------------------------|
+| `/indicacoes`    | GET    | Página principal (Blade) |
+
+### API (JSON)
+
+| Rota                  | Método | Ação                     |
+|-----------------------|--------|--------------------------|
+| `GET /api/indicacao` | GET    | Listar todos             |
+| `POST /api/indicacao`| POST   | Adicionar novo           |
+| `DELETE /api/indicacao/{id}` | DELETE | Remover |
+
+---
+
+## Funcionalidades
+
+| Funcionalidade         | Status |
+|------------------------|--------|
+| Adicionar contato      | Done |
+| Listar contatos        | Done |
+| Remover contato        | Done |
+| Máscara de telefone    | Done |
+| Validação (frontend + backend) | Done |
+| Feedback visual (AJAX) | Done |
+| Dados persistidos      | Done |
+| Responsivo (mobile)    | Done |
+
+---
+
+## Model: `Indicacao.php`
+
+```php
+protected $table = 'indicacoes';
+protected $fillable = ['nome', 'email', 'telefone'];
+
+const CREATED_AT = 'criado_em';
+const UPDATED_AT = 'atualizado_em';
+```
+
+---
+
+## Controller: `IndicacaoController.php`
+
+```php
+public function index()
+{
+    return response()->json(Indicacao::orderBy('criado_em', 'desc')->get());
+}
+
+public function store(Request $request)
+{
+    $request->validate([
+        'nome' => 'required|string|max:255',
+        'email' => 'required|email|unique:indicacoes,email',
+        'telefone' => 'required|regex:/^\(\d{2}\) \d{5}-\d{4}$/',
+    ]);
+
+    $indicacao = Indicacao::create($request->only('nome', 'email', 'telefone'));
+
+    return response()->json($indicacao, 201);
+}
+
+public function destroy($id)
+{
+    Indicacao::findOrFail($id)->delete();
+    return response()->json(['message' => 'Removido com sucesso']);
+}
+```
+
+---
+
+## Interface (Blade + Tailwind + jQuery)
+
+- Formulário com validação
+- Lista com cards responsivos
+- Botão de remoção com confirmação
+- Feedback de carregamento
+- Máscara automática de telefone
+
+---
+
+## Comandos Úteis
+
+```bash
+# Limpar cache
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+
+# Ver rotas
+php artisan route:list
+
+# Testar no Tinker
+php artisan tinker
+>>> App\Models\Indicacao::all();
+```
+
+---
+
+## Melhorias Futuras
+
+- [ ] Editar contato (PUT)
+- [ ] Busca em tempo real
+- [ ] Paginação
+- [ ] Exportar para Excel/CSV
+- [ ] Autenticação (Sanctum)
+- [ ] Livewire (opcional)
+
+---
+
+## Autor
+
+**Desenvolvido por:** [Miguel Borges]  
+**Data:** 10 de Novembro de 2025  
+
+
+---
+
+> **"Um sistema simples, funcional e bonito."**  
+> Feito com Laravel, amor e café.
+
+
+
+
