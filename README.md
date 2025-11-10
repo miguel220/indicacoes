@@ -133,9 +133,9 @@ Acesse: [http://localhost:8000/](http://localhost:8000/)
 
 | Rota                  | Método | Ação                     |
 |-----------------------|--------|--------------------------|
-| `GET /api/indicacoes` | GET    | Listar todos             |
-| `POST /api/indicacoes`| POST   | Adicionar novo           |
-| `DELETE /api/indicacoes/{id}` | DELETE | Remover |
+| `GET /api/indicacao` | GET    | Listar todos             |
+| `POST /api/indicacao`| POST   | Adicionar novo           |
+| `DELETE /api/indicacao/{id}` | DELETE | Remover |
 
 ---
 
